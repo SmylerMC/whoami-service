@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,7 +13,8 @@ func routeGetIp(c *gin.Context) {
 }
 
 func main() {
+	fmt.Println("Starting whoami service...")
 	router := gin.Default()
 	router.GET("/ip", routeGetIp)
-	router.Run("localhost:8080")
+	router.Run("0.0.0.0:8080")
 }
