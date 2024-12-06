@@ -15,6 +15,7 @@ func routeGetIp(c *gin.Context) {
 func main() {
 	fmt.Println("Starting whoami service...")
 	router := gin.Default()
+	router.GET("/", routeGetIp)
 	router.GET("/ip", routeGetIp)
 	router.Run("0.0.0.0:8080")
 }
