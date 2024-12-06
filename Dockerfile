@@ -13,7 +13,7 @@ FROM alpine
 COPY --from=build /main /main
 
 ENV GIN_MODE=release
-
+USER 65536:65536
 EXPOSE 8080/tcp
 
 ENTRYPOINT ["/main"]
