@@ -1,0 +1,73 @@
+# Number of replicas in the deployment/replicaset for the main application
+replicaCount: 1
+
+# Container image details
+image:
+  repository: ghcr.io/smylermc/whoami-service
+  pullPolicy: IfNotPresent
+  tag: master
+
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+# Service account details
+serviceAccount:
+  create: true
+  automount: false  # The default service does not require API access
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# Main service
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - whoami.example.com
+    - whoami4.example.com
+    - host: whoami6.example.com
+  tls: []
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /ip
+    port: http
+readinessProbe:
+  httpGet:
+    path: /ip
+    port: http
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+networkPolicy:
+  enable: true
